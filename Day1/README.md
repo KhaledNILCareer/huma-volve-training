@@ -281,6 +281,24 @@ GET request
 ```
 
 ---
+## Extra Task: Native http vs Express.js — Comparison
+
+**Native Node.js `http` module:**
+- Routing had to be done manually with `if`/`else if` chains checking `req.method` and `req.url`.
+- Reading the request body required manually listening to the `data` and `end` events on the stream, buffering the chunks, and parsing them with `JSON.parse()` — and this had to be repeated in every route that needed a body (POST, PUT, DELETE).
+- Sending a JSON response meant setting headers manually with `res.writeHead()` and calling `JSON.stringify()` every time.
+- A missed `if`/`else` connection, a variable used before it was assigned, or code placed outside the `end` callback (so it ran before the body had actually arrived) were all easy mistakes to make and easy to miss.
+
+**Express.js:**
+- Routing is declarative — `app.get()`, `app.post()`, `app.put()`, `app.delete()` — with no manual method/URL checks.
+- `express.json()` middleware parses the body automatically; it's available right away as `req.body`, with no repeated boilerplate per route.
+- `res.status().json()` handles both the status code and the JSON response in one chained call.
+- A single catch-all `app.use()` at the end covers any route that isn't matched.
+
+**Which was easier, and why:** 
+Express.js was noticeably easier to work with. The native `http` module forces you to rebuild routing, body parsing, and response formatting from scratch for every endpoint, which means more boilerplate and more room for small mistakes (wrong variable names, misplaced brackets, code executed before async data was ready). Express removes that repetitive part and lets the focus stay on the actual logic of each route. That said, building the REST API with the native module first was valuable — it made clear what Express is actually doing under the hood (routing, parsing, responses) instead of it feeling like "magic."
+
+---
 
 ## Part 5: Jira Practice
 
