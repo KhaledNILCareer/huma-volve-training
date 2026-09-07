@@ -10,7 +10,18 @@ let students = [
 
 app.get('/students', (req, res) => {
   res.json(students)
-});
+})
+
+app.get('/student', (req, res) => {
+  const id = parseInt(req.query.id);
+  const student = students.find(s => s.id === id);
+
+  if (!student) {
+    res.status(404).json({ success: false, message: 'Student not found' });
+  } else {
+    res.json(student);
+  }
+})
 
 app.post('/students', (req, res) => {
   students.push(req.body)
