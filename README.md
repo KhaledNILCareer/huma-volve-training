@@ -8,7 +8,7 @@ Each folder represents one day of training, containing the assignment submission
 
 | Day | Topics | Link |
 |-----|--------|------|
-| Day 1 | Node.js `fs` module, Callbacks vs Promises/async-await, HTTP module (REST API), Express.js, Jira | [Day1 Task](./Day1%20Task) |
+| Day 1 | Node.js `fs` module, Callbacks vs Promises/async-await, HTTP module (REST API), Express.js, Jira | [Day1 Task](./Day1) |
 
 *(More days will be added as the training progresses.)*
 
