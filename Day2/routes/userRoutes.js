@@ -7,6 +7,7 @@ import {
   deleteUser
 } from '../controllers/userController.js';
 import { protect } from '../middleware/authMiddleware.js';
+import { authorize } from '../middleware/roleMiddleware.js';
 
 const router = express.Router();
 
@@ -15,6 +16,6 @@ router.get('/', protect, getAllUsers);
 router.get('/:id', protect, getUserById);
 router.post('/', createUser);
 router.put('/:id', protect, updateUser);
-router.delete('/:id', protect, deleteUser);
+router.delete('/:id', protect, authorize('admin'), deleteUser);
 
 export default router;
