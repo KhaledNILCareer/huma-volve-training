@@ -17,6 +17,9 @@ export const protect = (req, res, next) => {
     req.userId = decoded.id;
     next();
   } catch (err) {
-    return res.status(401).json({ success: false, message: 'Invalid or expired token' });
+    if (err.name === 'TokenExpiredError') {
+      return res.status(401).json({ success: false, message: 'Access token expired' });
+    }
+    return res.status(401).json({ success: false, message: 'Invalid access token' });
   }
 };

@@ -82,7 +82,10 @@ export const refresh = async (req, res) => {
 
     res.status(200).json({ success: true, message: 'Access token refreshed' });
   } catch (err) {
-    res.status(401).json({ success: false, message: 'Invalid or expired refresh token' });
+    if (err.name === 'TokenExpiredError') {
+      return res.status(401).json({ success: false, message: 'Access token expired' });
+    }
+    return res.status(401).json({ success: false, message: 'Invalid access token' });
   }
 };
 

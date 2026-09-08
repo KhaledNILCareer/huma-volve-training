@@ -19,6 +19,9 @@ export const getUserById = async (req, res) => {
       res.status(200).json(user);
     }
   } catch (err) {
+    if (err.name === 'CastError') {
+      return res.status(400).json({ success: false, message: 'Invalid user ID format' });
+    }
     res.status(500).json({ success: false, message: err.message });
   }
 };
@@ -57,6 +60,9 @@ export const updateUser = async (req, res) => {
       res.status(200).json(updatedUser);
     }
   } catch (err) {
+    if (err.name === 'CastError') {
+      return res.status(400).json({ success: false, message: 'Invalid user ID format' });
+    }
     res.status(400).json({ success: false, message: err.message });
   }
 };
@@ -71,6 +77,9 @@ export const deleteUser = async (req, res) => {
       res.status(200).json({ success: true, message: 'User deleted' });
     }
   } catch (err) {
+    if (err.name === 'CastError') {
+      return res.status(400).json({ success: false, message: 'Invalid user ID format' });
+    }
     res.status(500).json({ success: false, message: err.message });
   }
 };
