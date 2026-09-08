@@ -1,7 +1,7 @@
 # Day 2 Assignment Submission — MongoDB, Authentication & Streams
 
-**Name:** Khaled
-**Date:**
+**Name:** Khaled Hassan Farooq
+**Date:** 08-Sep-2026
 
 ---
 
