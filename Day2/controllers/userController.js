@@ -2,7 +2,12 @@ import User from '../models/User.js';
 
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find();
+    const filter = {};
+    if (req.query.role) {
+      filter.role = req.query.role;
+    }
+
+    const users = await User.find(filter);
     res.status(200).json(users);
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
