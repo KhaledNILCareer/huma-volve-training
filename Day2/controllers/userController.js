@@ -26,7 +26,11 @@ export const getUserById = async (req, res) => {
 export const createUser = async (req, res) => {
   try {
     const newUser = await User.create(req.body);
-    res.status(201).json(newUser);
+
+    const userResponse = newUser.toObject();
+    delete userResponse.password;
+
+    res.status(201).json(userResponse);
   } catch (err) {
     if (err.name === 'ValidationError') {
       const errors = Object.values(err.errors).map(e => e.message);
