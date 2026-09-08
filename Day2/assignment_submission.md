@@ -128,7 +128,7 @@ Also fixed a bug where users created before the `role` field was added didn't ha
 
 ## Task 11 – File Copy Using Streams
 
-*(In progress — will add implementation notes and screenshots once complete.)*
+Implemented a manual file copy using Node.js Streams and chunks. `fs.createReadStream()` reads `source.txt` in chunks; each `data` event writes the received chunk to `destination.txt` via `writeStream.write()`. The `end` event closes the write stream (`writeStream.end()`), and `error` events are handled on both streams. Verified destination content matches source content using `Get-FileHash` on both files.
 
 Code: [`streams/task11_manualStream.js`](./streams/task11_manualStream.js)
 
@@ -136,6 +136,6 @@ Code: [`streams/task11_manualStream.js`](./streams/task11_manualStream.js)
 
 ## Task 12 – File Copy Using Pipe
 
-*(In progress — will add implementation notes and screenshots once complete.)*
+Implemented the same file copy using `.pipe()`: `fs.createReadStream('source.txt').pipe(fs.createWriteStream('destination_pipe.txt'))`. This automatically handles reading, writing, and closing the streams. Handled `error` events on both streams and the `finish` event on the write stream to confirm the copy completed. Verified destination content matches source content using `Get-FileHash` on both files.
 
 Code: [`streams/task12_pipe.js`](./streams/task12_pipe.js)
