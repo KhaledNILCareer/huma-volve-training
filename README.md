@@ -8,7 +8,8 @@ Each folder represents one day of training, containing the assignment submission
 
 | Day | Topics | Link |
 |-----|--------|------|
-| Day 1 | Node.js `fs` module, Callbacks vs Promises/async-await, HTTP module (REST API), Express.js, Jira | [Day1 Task](./Day1) |
+| Day 1 | Node.js `fs` module, Callbacks vs Promises/async-await, HTTP module (REST API), Express.js, Jira | [Day1](./Day1) |
+| Day 2 | MongoDB Atlas & Mongoose, JWT Authentication, Role-Based Authorization, Error Handling, Query/Route Parameters, Node.js Streams | [Day2](./Day2) |
 
 *(More days will be added as the training progresses.)*
 
@@ -16,6 +17,8 @@ Each folder represents one day of training, containing the assignment submission
 
 - Node.js
 - Express.js
+- MongoDB Atlas / Mongoose
+- JWT (jsonwebtoken), bcrypt
 - Postman (API testing)
 
 ## About
