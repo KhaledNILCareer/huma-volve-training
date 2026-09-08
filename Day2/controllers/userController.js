@@ -28,7 +28,14 @@ export const createUser = async (req, res) => {
     const newUser = await User.create(req.body);
     res.status(201).json(newUser);
   } catch (err) {
-    res.status(400).json({ success: false, message: err.message });
+    if (err.name === 'ValidationError') {
+      const errors = Object.values(err.errors).map(e => e.message);
+      res.status(400).json({ success: false, errors });
+    } else if (err.code === 11000) {
+      res.status(400).json({ success: false, errors: ['Email already exists'] });
+    } else {
+      res.status(500).json({ success: false, message: err.message });
+    }
   }
 };
 
