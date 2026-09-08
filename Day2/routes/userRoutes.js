@@ -14,7 +14,7 @@ const router = express.Router();
 
 router.get('/', protect, getAllUsers);
 router.get('/:id', protect, getUserById);
-router.post('/', createUser);
+router.post('/', protect, createUser);
 router.put('/:id', protect, updateUser);
 router.delete('/:id', protect, authorize('admin'), deleteUser);
 
