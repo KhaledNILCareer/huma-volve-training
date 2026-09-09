@@ -38,7 +38,7 @@ export const login = async (req, res) => {
       return res.status(401).json({ success: false, message: 'Invalid email or password' });
     }
 
-    const accessToken = generateAccessToken(user._id);
+    const accessToken = generateAccessToken(user._id, user.role);
     const refreshToken = generateRefreshToken(user._id);
 
     res.cookie('accessToken', accessToken, {
@@ -71,7 +71,12 @@ export const refresh = async (req, res) => {
 
     const decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
 
-    const newAccessToken = generateAccessToken(decoded.id);
+    const user = await User.findById(decoded.id);
+    if (!user) {
+      return res.status(401).json({ success: false, message: 'User not found' });
+    }
+    
+    const newAccessToken = generateAccessToken(user._id, user.role);
 
     res.cookie('accessToken', newAccessToken, {
       httpOnly: true,
