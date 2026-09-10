@@ -67,7 +67,7 @@ export const getProductById = async (req, res) => {
   } catch (err) {
     
     if (err.name === 'CastError') {
-      return res.status(400).json({ success: false, message: 'Invalid user ID format' });
+      return res.status(400).json({ success: false, message: 'Invalid product ID format' });
     }
 
     res.status(500).json({ success: false, message: err.message });
