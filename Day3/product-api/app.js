@@ -5,6 +5,8 @@ import connectDB from './config/db.js';
 import userRoutes from './routes/userRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 
+import productRoutes from './routes/productRoutes.js';
+
 
 dotenv.config();
 connectDB();
@@ -15,6 +17,7 @@ app.use(cookieParser());
 
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
+app.use('/products', productRoutes);
 
 const PORT = 3000;
 app.listen(PORT, () => {
