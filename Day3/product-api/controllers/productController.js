@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import Product from '../models/Product.js';
 import Inventory from '../models/Inventory.js';
+import { generateProductInfo } from '../services/geminiService.js';
 
 export const createProduct = async (req, res) => {
   const session = await mongoose.startSession();
@@ -152,4 +153,29 @@ export const deleteProduct = async (req, res) => {
 
   } finally { session.endSession(); }
 
+};
+
+export const generateProductAI = async (req, res) => {
+  try {
+    const { name, shortDescription } = req.body;
+
+    if (!name || !shortDescription) {
+      return res.status(400).json({
+        success: false,
+        message: 'Name and shortDescription are required'
+      });
+    }
+
+    const result = await generateProductInfo(name, shortDescription);
+
+    res.status(200).json({
+      success: true,
+      data: result
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message
+    });
+  }
 };
